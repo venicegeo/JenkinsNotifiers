@@ -34,7 +34,7 @@
 - click save urls and close the options window.
 
 - The extention should be finished setting up and notifications should be poping up.
-t editor
+
 
 ![](/../master/ReadMeExtra/nine.png)
 
