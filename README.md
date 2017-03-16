@@ -1,5 +1,5 @@
 # Jankins Notifier Installation
-- Download the zip file
+- Download the zip file                                    
 ![](/../master/ReadMeExtra/dlZip.png)
 -Extract the folder you want, for exmaple if I wanted a notifier for beachfront I would extract BeachFrontJankinsNotifier
 ![](/../master/ReadMeExtra/two.png)
