@@ -150,30 +150,34 @@ var Services = (function () {
     var xmlParser = new DOMParser();
     var buildingRegExp = /_anime$/;
     var colorToClass = {
-      blue: 'success', yellow: 'warning', red: 'danger'
+      SUCCESS: 'success', UNSTABLE: 'warning', FAILURE: 'danger'
     };
     var colorToIcon = {
-      blue: 'green', yellow: 'yellow', red: 'red'
+      SUCCESS: 'green', UNSTABLE: 'yellow', FAILURE: 'red'
     };
     var status = {
-      blue: 'Success',
-      yellow: 'Unstable',
-      red: 'Failure',
-      aborted: 'Aborted',
-      notbuilt: 'Not built',
-      disabled: 'Disabled'
+      SUCCESS: 'Success',
+      UNSTABLE: 'Unstable',
+      FAILURE: 'Failure',
+      ABORTED: 'Aborted',
+      NOTBUILT: 'Not built',
+      DISABLED: 'Disabled'
     };
     var fetchOptions = {
       credentials: 'include'
     };
 
     function jobMapping(url, data) {
-      var basicColor = (data.color || '').replace(buildingRegExp, '');
+      var basicColor = (data.result || '').replace(buildingRegExp, '');
       var lastBuild = data.lastCompletedBuild || {};
+      var d = new Date(0);
+      
+      d.setUTCMilliseconds(data.timestamp);
+      console.log(JSON.stringify(d));
       return {
-        name: data.displayName || data.name || data.nodeName || 'All jobs',
+        name: (data.fullDisplayName).substring((data.fullDisplayName).lastIndexOf('beachfront »')+13,(data.fullDisplayName).length)+ '\r\n '+d.toGMTString() || 'All jobs',
         url: decodeURI(data.url || url),
-        building: buildingRegExp.test(data.color),
+        building: buildingRegExp.test(data.result),
         status: status[basicColor] || basicColor,
         statusClass: colorToClass[basicColor] || '',
         statusIcon: colorToIcon[basicColor] || 'grey',
@@ -190,12 +194,14 @@ var Services = (function () {
       url = url.charAt(url.length - 1) === '/' ? url : url + '/';
 
       return fetch(url + 'api/json/', fetchOptions).then(function (res) {
+        console.log(url);
         return res.ok ? res.json() : Promise.reject(res);
       }).then(function (data) {
         var job = jobMapping(url, data);
 
         if (data.jobs) {
           return fetch(url + 'cc.xml', fetchOptions).then(function (res) {
+            console.log(url);
             return res.ok ? res.text() : Promise.reject(res);
           }).then(function (text) {
             var projects = xmlParser.parseFromString(text, 'text/xml').getElementsByTagName('Project');
