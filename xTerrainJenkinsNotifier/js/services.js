@@ -164,7 +164,8 @@ var Services = (function () {
       DISABLED: 'Disabled'
     };
     var fetchOptions = {
-      credentials: 'include'
+      credentials: 'include',
+      headers: {'authorization':'Basic ' + btoa("username" + ":" + "Password"),}
     };
 
     function jobMapping(url, data) {
