@@ -176,7 +176,7 @@ var Services = (function () {
       d.setUTCMilliseconds(data.timestamp);
       console.log(JSON.stringify(d));
       return {
-        name: (data.fullDisplayName).substring((data.fullDisplayName).lastIndexOf('beachfront »')+13,(data.fullDisplayName).length)+ '\r\n '+d.toGMTString() || 'All jobs',
+        name: (data.fullDisplayName).substring((data.fullDisplayName).lastIndexOf('xterrain »')+13,(data.fullDisplayName).length)+ '\r\n '+d.toGMTString() || 'All jobs',
         url: decodeURI(data.url || url),
         building: buildingRegExp.test(data.result),
         status: status[basicColor] || basicColor,

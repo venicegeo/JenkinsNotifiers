@@ -2,7 +2,7 @@
 "update_url": "https://clients2.google.com/service/update2/crx",
 
   "manifest_version": 2,
-  "name": "BeachFront Jenkins Notifier",
+  "name": "xTerrain Jenkins Notifier",
   "description": "This extension notifies you on Jenkins build results.",
   "author": "Guillaume Girou",
   "homepage_url": "https://github.com/ggirou/yet-another-jenkins-notifier",
@@ -12,7 +12,7 @@
     "browser_style": false,
     "default_icon": "img/icon.png",
     "default_popup": "popup.html",
-    "default_title": "BeachFront Jenkins Notifier"
+    "default_title": "xTerrain Jenkins Notifier"
   },
   "icons": {
     "16": "img/icon16.png",
